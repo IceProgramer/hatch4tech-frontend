@@ -1,63 +1,110 @@
-﻿/**
- * @name umi 的路由配置
- * @description 只支持 path,component,routes,redirect,wrappers,name,icon 的配置
- * @param path  path 只支持两种占位符配置，第一种是动态参数 :id 的形式，第二种是 * 通配符，通配符只能出现路由字符串的最后。
- * @param component 配置 location 和 path 匹配后用于渲染的 React 组件路径。可以是绝对路径，也可以是相对路径，如果是相对路径，会从 src/pages 开始找起。
- * @param routes 配置子路由，通常在需要为多个路径增加 layout 组件时使用。
- * @param redirect 配置路由跳转
- * @param wrappers 配置路由组件的包装组件，通过包装组件可以为当前的路由组件组合进更多的功能。 比如，可以用于路由级别的权限校验
- * @param name 配置路由的标题，默认读取国际化文件 menu.ts 中 menu.xxxx 的值，如配置 name 为 login，则读取 menu.ts 中 menu.login 的取值作为标题
- * @param icon 配置路由的图标，取值参考 https://ant.design/components/icon-cn， 注意去除风格后缀和大小写，如想要配置图标为 <StepBackwardOutlined /> 则取值应为 stepBackward 或 StepBackward，如想要配置图标为 <UserOutlined /> 则取值应为 user 或者 User
- * @doc https://umijs.org/docs/guides/routes
- */
-export default [
+﻿export default [
   {
     path: '/user',
     layout: false,
     routes: [
-      {
-        name: 'login',
-        path: '/user/login',
-        component: './User/Login',
-      },
+      { path: '/user/login', component: './User/Login' },
+      { path: '/user/register', name: '注册', component: './User/Register' },
     ],
   },
   {
     path: '/welcome',
-    name: 'welcome',
     icon: 'smile',
     component: './Welcome',
   },
   {
-    path: '/admin',
-    name: 'admin',
-    icon: 'crown',
-    access: 'canAdmin',
+    path: '/',
+    name: '首页',
+    icon: 'HomeOutlined',
+    redirect: '/welcome',
+  },
+  {
+    path: '/student',
+    name: '学生检索',
+    icon: 'UserOutlined',
+    redirect: '/welcome',
+  },
+  {
+    path: '/teacher',
+    name: '老师检索',
+    icon: 'UserOutlined',
+    redirect: '/welcome',
+  },
+  {
+    path: '/competition',
+    name: '竞赛相关',
+    icon: 'StarOutlined',
+    component: './Competition/ShowCompetition',
+  },
+  {
+    path: '/competition/info',
+    name: '竞赛处理',
+    hideInMenu: true,
     routes: [
       {
-        path: '/admin',
-        redirect: '/admin/sub-page',
+        path: '/competition/info/:id',
+        name: '竞赛',
+        hideInMenu: true,
+        component: './Competition/CompetitionInfo',
+      }
+    ]
+  },
+  {
+    path: '/activity',
+    name: '活动相关',
+    icon: 'GiftOutlined',
+    redirect: '/welcome',
+  },
+  {
+    path: '/college',
+    name: '学院立项',
+    icon: 'InboxOutlined',
+  },
+  {
+    path: '/team',
+    name: '组队频道',
+    icon: 'TeamOutlined',
+    routes: [
+      {
+        path: '/team/show',
+        name: '队伍展示',
+        component: './Team/ShowTeam',
       },
       {
-        path: '/admin/sub-page',
-        name: 'sub-page',
-        component: './Admin',
+        path: '/team/add',
+        name: '创建队伍',
+        component: './Team/AddTeam',
+      },
+      {
+        path: '/team/update/:id',
+        name: '更新队伍',
+        hideInMenu: true,
+        component: './Team/UpdateTeam',
+      },
+      {
+        path: '/team/apply/:id',
+        name: '队伍申请',
+        hideInMenu: true,
+        component: './Team/ApplyTeam',
       },
     ],
   },
   {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
-  },
-  {
-    path: '/',
+    path: '/shop',
+    name: '积分商城',
+    icon: 'ShoppingCartOutlined',
     redirect: '/welcome',
   },
   {
-    path: '*',
-    layout: false,
-    component: './404',
+    path: '/user/center',
+    name: '个人中心',
+    hideInMenu: true,
+    routes: [
+      {
+        path: '/user/center',
+        component: './UserCenter',
+      },
+    ],
   },
+  { path: '*', name: '404', layout: false, component: './404' },
 ];
