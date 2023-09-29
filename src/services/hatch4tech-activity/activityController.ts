@@ -32,6 +32,21 @@ export async function deleteActivityUsingPOST(
   });
 }
 
+/** getActivityVOById GET /hatch4tech-activity/activity/activity/get */
+export async function getActivityVOByIdUsingGET(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.getActivityVOByIdUsingGETParams,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseActivityVO_>('/hatch4tech-activity/activity/activity/get', {
+    method: 'GET',
+    params: {
+      ...params,
+    },
+    ...(options || {}),
+  });
+}
+
 /** pageActivity POST /hatch4tech-activity/activity/activity/page/list */
 export async function pageActivityUsingPOST(
   body: API.ActivityQueryRequest,

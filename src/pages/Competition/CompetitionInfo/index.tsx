@@ -7,6 +7,7 @@ import { Col, message, Row, Tabs } from 'antd';
 import React, { useEffect, useState } from 'react';
 import './index.less';
 import CompetitionAnnounceCard from "@/components/Competition/CompetitionAnnounceCard";
+import CompetitionSignUpCard from "@/components/Competition/CompetitionSignUpCard";
 
 
 const CompetitionInfo: React.FC = () => {
@@ -59,7 +60,7 @@ const CompetitionInfo: React.FC = () => {
                         比赛报名
                       </span>
                     ),
-                    children: <MyTeamCard />,
+                    children: <CompetitionSignUpCard />,
                   },
                   {
                     key: '3',

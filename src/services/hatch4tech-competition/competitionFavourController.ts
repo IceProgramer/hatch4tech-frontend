@@ -2,8 +2,8 @@
 /* eslint-disable */
 import { request } from '@umijs/max';
 
-/** favourActivity POST /hatch4tech-competition/competition/favour */
-export async function favourActivityUsingPOST(
+/** favourCompetition POST /hatch4tech-competition/competition/favour */
+export async function favourCompetitionUsingPOST(
   body: API.CompetitionFavourRequest,
   options?: { [key: string]: any },
 ) {

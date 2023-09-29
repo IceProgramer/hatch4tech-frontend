@@ -10,25 +10,25 @@
   {
     path: '/welcome',
     icon: 'smile',
-    component: './Welcome',
+    component: './Home',
   },
   {
     path: '/',
     name: '首页',
     icon: 'HomeOutlined',
-    redirect: '/welcome',
+    component: './Home',
   },
   {
     path: '/student',
     name: '学生检索',
     icon: 'UserOutlined',
-    redirect: '/welcome',
+    redirect: '/todo',
   },
   {
     path: '/teacher',
     name: '老师检索',
     icon: 'UserOutlined',
-    redirect: '/welcome',
+    redirect: '/todo',
   },
   {
     path: '/competition',
@@ -37,28 +37,28 @@
     component: './Competition/ShowCompetition',
   },
   {
-    path: '/competition/info',
-    name: '竞赛处理',
+    path: '/competition/info/:id',
+    name: '竞赛详情',
     hideInMenu: true,
-    routes: [
-      {
-        path: '/competition/info/:id',
-        name: '竞赛',
-        hideInMenu: true,
-        component: './Competition/CompetitionInfo',
-      }
-    ]
+    component: './Competition/CompetitionInfo',
   },
   {
     path: '/activity',
     name: '活动相关',
     icon: 'GiftOutlined',
-    redirect: '/welcome',
+    component: './Activity/ShowActivity',
+  },
+  {
+    path: '/activity/info/:id',
+    name: '活动详情',
+    hideInMenu: true,
+    component: './Activity/ActivityInfo',
   },
   {
     path: '/college',
     name: '学院立项',
     icon: 'InboxOutlined',
+    redirect: '/todo',
   },
   {
     path: '/team',
@@ -93,7 +93,7 @@
     path: '/shop',
     name: '积分商城',
     icon: 'ShoppingCartOutlined',
-    redirect: '/welcome',
+    redirect: '/todo',
   },
   {
     path: '/user/center',
@@ -107,4 +107,5 @@
     ],
   },
   { path: '*', name: '404', layout: false, component: './404' },
+  { path: '/todo', name: '正在制作', hideInMenu: true, component: './TODO' },
 ];

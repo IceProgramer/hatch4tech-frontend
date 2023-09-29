@@ -56,6 +56,13 @@ declare namespace API {
     startTime?: string;
   };
 
+  type BaseResponseActivityVO_ = {
+    code?: number;
+    data?: ActivityVO;
+    message?: string;
+    success?: boolean;
+  };
+
   type BaseResponseBoolean_ = {
     code?: number;
     data?: boolean;
@@ -92,6 +99,11 @@ declare namespace API {
   };
 
   type DeleteRequest = {
+    id?: number;
+  };
+
+  type getActivityVOByIdUsingGETParams = {
+    /** id */
     id?: number;
   };
 

@@ -1,43 +1,43 @@
-import ProcessBadge from '@/components/ProcessBadge';
 import { pageCompetitionUsingPOST } from '@/services/hatch4tech-competition/competitionController';
 import { history } from '@umijs/max';
-import { Card, Divider, List, message, Space, Typography } from 'antd';
+import { Badge, Card, Divider, List, message, Space, Typography } from 'antd';
 import Meta from 'antd/es/card/Meta';
 import Search from 'antd/es/input/Search';
 import React, { useEffect, useState } from 'react';
 import './index.less';
-import { EditOutlined, SettingOutlined } from "@ant-design/icons";
+import ProcessBadge from "@/components/ProcessBadge";
+import { pageActivityUsingPOST } from "@/services/hatch4tech-activity/activityController";
 
 const { Text } = Typography;
 
-const ShowCompetition: React.FC = () => {
+const ShowActivity: React.FC = () => {
   const initSearchParam = {
     current: 1,
     pageSize: 8,
   };
-  const [searchParam, setSearchParam] = useState<API.CompetitionQueryRequest>({
-    ...initSearchParam,
-  });
+  const [searchParam, setSearchParam] = useState<API.ActivityQueryRequest>({ ...initSearchParam });
   const [total, setTotal] = useState<number>();
   const [searchLoading, setSearchLoading] = useState<boolean>(false);
-  const [activityList, setActivityList] = useState<API.CompetitionVO[]>();
+  const [activityList, serActivityList] = useState<API.ActivityVO[]>();
 
-  const getCompetitionList = async () => {
+  const getActivityList = async () => {
     setSearchLoading(true);
     try {
-      const res = await pageCompetitionUsingPOST(searchParam);
+      const res = await pageActivityUsingPOST(searchParam);
       if (res.code === 0) {
-        setActivityList(res.data?.records ?? []);
+        serActivityList(res.data?.records ?? []);
         setTotal(res.data?.total ?? 0);
       }
     } catch (error: any) {
-      message.error('获取队伍失败' + error.message);
+      message.error('获取活动失败' + error.message);
     }
     setSearchLoading(false);
   };
 
+
+
   useEffect(() => {
-    getCompetitionList();
+    getActivityList();
   }, [searchParam]);
 
   return (
@@ -74,19 +74,19 @@ const ShowCompetition: React.FC = () => {
             total: total,
           }}
           dataSource={activityList}
-          renderItem={(competitionVO: API.CompetitionVO) => (
+          renderItem={(activityVO: API.ActivityVO) => (
             <List.Item>
               <Card
                 onClick={() => {
-                  history.push(`/competition/info/${competitionVO.id}`);
+                  history.push(`/activity/info/${activityVO.id}`);
                 }}
                 hoverable
                 cover={
                   <img
-                    alt={competitionVO.competitionName}
+                    alt={activityVO.activityName}
                     height={180}
                     width={240}
-                    src={competitionVO.competitionImg}
+                    src={activityVO.activityImg}
                   />
                 }
               >
@@ -94,19 +94,15 @@ const ShowCompetition: React.FC = () => {
                   title={
                     <Space>
                       <Text style={{ maxWidth: '100%' }} ellipsis>
-                        {competitionVO.competitionName}
+                        {activityVO.activityName}
                       </Text>
                       <ProcessBadge
-                        startTime={competitionVO.startTime}
-                        endTime={competitionVO.endTime}
+                        startTime={activityVO.startTime}
+                        endTime={activityVO.endTime}
                       />
                     </Space>
                   }
-                  description={
-                    <Space>
-                      <div>{`${competitionVO.startTime} ~ ${competitionVO.endTime}`}</div>
-                    </Space>
-                  }
+                  description={`${activityVO.startTime} ~ ${activityVO.endTime}`}
                 />
               </Card>
             </List.Item>
@@ -117,4 +113,4 @@ const ShowCompetition: React.FC = () => {
   );
 };
 
-export default ShowCompetition;
+export default ShowActivity;
