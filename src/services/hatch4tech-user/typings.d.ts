@@ -350,7 +350,7 @@ declare namespace API {
     studentPolitics?: string;
     studentProfile?: string;
     studentSkill?: string;
-    studentWish?: string[];
+    studentWish?: StudentWishVO[];
     userAccount?: string;
     userAge?: number;
     userAvatar?: string;
@@ -399,7 +399,6 @@ declare namespace API {
     studentWish?: number[];
     userAccount?: string;
     userAge?: number;
-    userAvatar?: string;
     userPassword?: string;
     userSlogan?: string;
     userWechat?: string;

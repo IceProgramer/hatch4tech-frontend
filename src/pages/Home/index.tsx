@@ -7,13 +7,12 @@ const Home: React.FC = () => {
   return (
     <>
       <div className="home">
-        <a href='/timeline/index.html'>
         <button type="button" className="welcomeButton">
           <Space>
             开启科技创新之旅
             <ArrowRightOutlined />
           </Space>
-        </button></a>
+        </button>
       </div>
     </>
   );

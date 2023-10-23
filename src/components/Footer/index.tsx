@@ -14,15 +14,15 @@ const Footer: React.FC = () => {
       copyright={`${currentYear} ${defaultMessage}`}
       links={[
         {
-          key: '大学生科技创新平台',
-          title: '大学生科技创新平台',
-          href: 'https://pro.ant.design',
+          key: '圣光机联合学院',
+          title: '圣光机联合学院',
+          href: 'https://joint.hdu.edu.cn/main.htm',
           blankTarget: true,
         },
         {
           key: 'github',
           title: <GithubOutlined />,
-          href: 'https://github.com/ant-design/ant-design-pro',
+          href: 'https://github.com/IceProgramer',
           blankTarget: true,
         },
         {

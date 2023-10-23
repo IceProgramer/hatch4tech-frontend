@@ -34,6 +34,7 @@ declare namespace API {
     announceName?: string;
     id?: number;
     publishTime?: string;
+    teamList?: TeamRankVO[];
   };
 
   type BaseResponseAnnounceVO_ = {
@@ -106,13 +107,6 @@ declare namespace API {
     success?: boolean;
   };
 
-  type BaseResponsePageFileVO_ = {
-    code?: number;
-    data?: PageFileVO_;
-    message?: string;
-    success?: boolean;
-  };
-
   type BaseResponsePageResourceVO_ = {
     code?: number;
     data?: PageResourceVO_;
@@ -133,6 +127,7 @@ declare namespace API {
     competitionImg?: string;
     competitionName?: string;
     endTime?: string;
+    memberNum?: number;
     resourceList?: ResourceAddRequest[];
     startTime?: string;
     statusList?: StatusAddRequest[];
@@ -155,6 +150,14 @@ declare namespace API {
     searchText?: string;
     sortField?: string;
     sortOrder?: string;
+  };
+
+  type CompetitionSignRequest = {
+    competitionFileList?: FileAddRequest[];
+    competitionId?: number;
+    projectDescription?: string;
+    projectName?: string;
+    teamId?: number;
   };
 
   type CompetitionUpdateRequest = {
@@ -190,19 +193,6 @@ declare namespace API {
     fileUrl?: string;
     resourceId?: number;
     resourceType?: number;
-    teamId?: number;
-  };
-
-  type FileQueryRequest = {
-    competitionId?: number;
-    current?: number;
-    id?: number;
-    ids?: number[];
-    pageSize?: number;
-    resourceId?: number;
-    searchText?: string;
-    sortField?: string;
-    sortOrder?: string;
   };
 
   type FileVO = {
@@ -248,16 +238,6 @@ declare namespace API {
     orders?: OrderItem[];
     pages?: number;
     records?: CompetitionVO[];
-    searchCount?: boolean;
-    size?: number;
-    total?: number;
-  };
-
-  type PageFileVO_ = {
-    current?: number;
-    orders?: OrderItem[];
-    pages?: number;
-    records?: FileVO[];
     searchCount?: boolean;
     size?: number;
     total?: number;
@@ -349,5 +329,18 @@ declare namespace API {
     statusId?: number;
     statusName?: string;
     statusTime?: string;
+  };
+
+  type TeamMemberBO = {
+    userId?: number;
+    userName?: string;
+  };
+
+  type TeamRankVO = {
+    memberList?: TeamMemberBO[];
+    price?: number;
+    teacherName?: string;
+    teamId?: number;
+    teamName?: string;
   };
 }

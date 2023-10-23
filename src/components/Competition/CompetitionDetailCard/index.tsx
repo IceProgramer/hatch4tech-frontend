@@ -1,11 +1,11 @@
 import ProcessBadge from '@/components/ProcessBadge';
+import { favourCompetitionUsingPOST } from '@/services/hatch4tech-competition/competitionFavourController';
 import { ShareAltOutlined, StarFilled, StarOutlined } from '@ant-design/icons';
 import { ProDescriptions } from '@ant-design/pro-components';
 import { Button, Card, Divider, message, Space, Tooltip, Typography } from 'antd';
 import Meta from 'antd/es/card/Meta';
-import React,{ useState } from 'react';
+import React, { useState } from 'react';
 import './index.less';
-import { favourCompetitionUsingPOST } from "@/services/hatch4tech-competition/competitionFavourController";
 
 const { Paragraph } = Typography;
 
@@ -21,31 +21,33 @@ const CompetitionDetailCard: React.FC<Props> = (props) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const starCompetition = async () => {
+    setLoading(true);
     // 收藏
     if (!hasFavour) {
       const competitionFavourRequest: API.CompetitionFavourRequest = {
-        competitionId: competition.id
-      }
+        competitionId: competition.id,
+      };
       const res = await favourCompetitionUsingPOST(competitionFavourRequest);
       if (res.code === 0) {
         setFavourNum(favourNum + 1);
         setHasFavour(true);
-        message.success("收藏成功")
+        message.success('收藏成功');
       }
     }
     // 取消收藏
     if (hasFavour) {
       const competitionFavourRequest: API.CompetitionFavourRequest = {
-        competitionId: competition.id
-      }
+        competitionId: competition.id,
+      };
       const res = await favourCompetitionUsingPOST(competitionFavourRequest);
       if (res.code === 0) {
         setFavourNum(favourNum - 1);
         setHasFavour(false);
-        message.success("取消收藏成功")
+        message.success('取消收藏成功');
       }
     }
-  }
+    setLoading(false);
+  };
 
   return (
     <>

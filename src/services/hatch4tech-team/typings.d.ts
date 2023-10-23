@@ -57,6 +57,7 @@ declare namespace API {
   type CompetitionBasicInfoBO = {
     competitionName?: string;
     id?: number;
+    memberNum?: number;
   };
 
   type CreateUserVO = {
@@ -170,8 +171,9 @@ declare namespace API {
   };
 
   type TeamApplyVO = {
-    id?: number;
     applyStatus?: number;
+    failedMessage?: string;
+    id?: number;
     tagId?: number;
     tagName?: string;
     teamId?: number;
@@ -179,15 +181,13 @@ declare namespace API {
     userAvatar?: string;
     userId?: number;
     userName?: string;
-    failedMessage?: string
   };
 
   type TeamCreateRequest = {
-    competitionId?: number;
     maxNum?: number;
     slogan?: string;
     tagName?: string;
-    teacherId?: number;
+    teacherIds?: number[];
     teamDescript?: string;
     teamImg?: string;
     teamName?: string;
@@ -202,8 +202,10 @@ declare namespace API {
   };
 
   type TeamQueryRequest = {
+    competitionId?: number;
     current?: number;
     ids?: number[];
+    memberId?: number;
     pageSize?: number;
     searchText?: string;
     sortField?: string;
@@ -241,6 +243,7 @@ declare namespace API {
     competitionId?: number;
     id?: number;
     maxNum?: number;
+    teacherIds?: number[];
     teamDescript?: string;
     teamName?: string;
     teamTags?: TeamTagRequest[];
@@ -254,7 +257,7 @@ declare namespace API {
     hasNum?: number;
     maxNum?: number;
     slogan?: string;
-    teacherInfo?: TeamTeacherVO;
+    teacherInfoList?: TeamTeacherVO[];
     teamDescript?: string;
     teamId?: number;
     teamImg?: string;
@@ -267,12 +270,12 @@ declare namespace API {
   type UserApplyVO = {
     applyStatus?: number;
     createUser?: CreateUserVO;
+    failedMessage?: string;
     id?: number;
     tagName?: string;
     teamId?: number;
     teamImg?: string;
     teamName?: string;
     teamStatus?: number;
-    failedMessage?: string;
   };
 }

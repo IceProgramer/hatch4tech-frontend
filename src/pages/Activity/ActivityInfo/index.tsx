@@ -1,21 +1,14 @@
-import ProcessBadge from '@/components/ProcessBadge';
+import ActivityDetailCard from '@/components/ActivityCard/ActivityDetailCard';
+import ActivitySignCard from '@/components/ActivityCard/ActivitySignCard';
 import { getActivityVOByIdUsingGET } from '@/services/hatch4tech-activity/activityController';
 import { useParams } from '@@/exports';
-import { ShareAltOutlined, StarFilled, StarOutlined, StarTwoTone } from '@ant-design/icons';
-import { ProDescriptions } from '@ant-design/pro-components';
-import { Button, Card, message, Space, Tooltip, Typography } from 'antd';
-import Meta from 'antd/es/card/Meta';
+import { NotificationTwoTone, ProjectTwoTone } from '@ant-design/icons';
+import { Col, message, Row, Tabs } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { favourCompetitionUsingPOST } from "@/services/hatch4tech-competition/competitionFavourController";
-import { favourActivityUsingPOST } from "@/services/hatch4tech-activity/activityFavourController";
-
-const { Paragraph } = Typography;
+import './index.less';
 
 const ActivityInfo: React.FC = () => {
   const [activity, setActivity] = useState<API.ActivityVO>();
-  const [favourNum, setFavourNum] = useState<number>(activity?.favourNum ?? 0);
-  const [hasFavour, setHasFavour] = useState<boolean>(activity?.hasFavour ?? false)
-  const [loading, setLoading] = useState<boolean>(false);
 
   const params = useParams();
 
@@ -34,104 +27,45 @@ const ActivityInfo: React.FC = () => {
     }
   };
 
-  const starActivity = async () => {
-    // 收藏
-    if (!hasFavour) {
-      const activityFavourRequest: API.ActivityFavourRequest = {
-        activityId: activity?.id
-      }
-      const res = await favourActivityUsingPOST(activityFavourRequest);
-      if (res.code === 0) {
-        setFavourNum(favourNum + 1);
-        setHasFavour(true);
-        message.success("收藏成功")
-      }
-    }
-    // 取消收藏
-    if (hasFavour) {
-      const activityFavourRequest: API.ActivityFavourRequest = {
-        activityId: activity?.id
-      }
-      const res = await favourActivityUsingPOST(activityFavourRequest);
-      if (res.code === 0) {
-        setFavourNum(favourNum - 1);
-        setHasFavour(false);
-        message.success("取消收藏成功")
-      }
-    }
-  }
-
-
   useEffect(() => {
     getActivity();
   }, []);
 
   return (
     <>
-      <Card
-        style={{ margin: '0 150px' }}
-        cover={<img alt={activity?.activityName} height={300} src={activity?.activityImg} />}
-      >
-        <Meta
-          title={
-            <ProDescriptions
-              style={{ marginTop: '15px', width: '100%' }}
-              column={1}
-              title={
-                <Space>
-                  <span>{activity?.activityName}</span>
-                  <Space.Compact block>
-                    <Tooltip title={hasFavour ? '取消收藏' : '收藏'}>
-                      <Button loading={loading} onClick={starActivity}>
-                        {hasFavour ? <StarFilled /> : <StarOutlined />}
-                        <span>{favourNum}</span>
-                      </Button>
-                    </Tooltip>
-                    <Tooltip title="分享">
-                      <Button icon={<ShareAltOutlined />} />
-                    </Tooltip>
-                  </Space.Compact>
-                </Space>
-              }
-              size="small"
-              dataSource={{
-                competitionName: activity?.activityName,
-                teamTime: (
-                  <Space>
-                    <div>{`${activity?.startTime} 到 ${activity?.endTime}`}</div>
-                    <ProcessBadge startTime={activity?.startTime} endTime={activity?.endTime} />
-                  </Space>
-                ),
-                competitionHost: activity?.activityHost,
-                competitionDescript: (
-                  <Paragraph style={{ width: '100%' }}>
-                    <pre style={{ marginTop: 0 }}>{activity?.activityDescript}</pre>
-                  </Paragraph>
-                ),
-              }}
-              columns={[
-                {
-                  title: '竞赛名称',
-                  key: 'text',
-                  dataIndex: 'competitionName',
-                },
-                {
-                  title: '起止时间',
-                  dataIndex: 'teamTime',
-                },
-                {
-                  title: '主办单位',
-                  dataIndex: 'competitionHost',
-                },
-                {
-                  title: '竞赛简介',
-                  dataIndex: 'competitionDescript',
-                },
-              ]}
-            />
-          }
-        />
-      </Card>
+      {activity ? (
+        <div className="activityInfo">
+          <Row>
+            <Col offset={2} style={{ width: '100%', height: 100 }}>
+              <Tabs
+                size="large"
+                tabPosition="left"
+                items={[
+                  {
+                    key: '1',
+                    label: (
+                      <span>
+                        <ProjectTwoTone /> 活动通知
+                      </span>
+                    ),
+                    children: <ActivityDetailCard activity={activity} />,
+                  },
+                  {
+                    key: '2',
+                    label: (
+                      <span>
+                        <NotificationTwoTone />
+                        结果公示
+                      </span>
+                    ),
+                    children: <ActivitySignCard activity={activity} />,
+                  },
+                ]}
+              />
+            </Col>
+          </Row>
+        </div>
+      ) : null}
     </>
   );
 };

@@ -114,11 +114,6 @@ const UpdateTeam: React.FC = () => {
           layout="horizontal"
           initialValues={teamInfo}
           submitter={{
-            // resetButtonProps: {
-            //   style: {
-            //     marginLeft: 10
-            //   },
-            // },
             submitButtonProps: {
               style: {
                 width: 100
@@ -194,10 +189,11 @@ const UpdateTeam: React.FC = () => {
                 label="关联竞赛信息(选填)"
               />
               <ProFormSelect
-                name="teacherId"
+                name="teacherIds"
                 options={teacherList}
                 width="sm"
-                initialValue={teamInfo.teacherInfo?.userId}
+                mode='multiple'
+                initialValue={teamInfo.teacherInfoList?.map((teacher) => teacher.userId)}
                 label="指导教师(选填)"
               />
               {teamInfo.competitionInfo ? <></> : null}
@@ -206,7 +202,7 @@ const UpdateTeam: React.FC = () => {
           <Card>
             <ProFormDigit
               name="maxNum"
-              label="最大人数"
+              label="队伍人数"
               tooltip="队伍人数不能超过20人"
               width="sm"
               initialValue={3}

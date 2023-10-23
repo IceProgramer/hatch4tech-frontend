@@ -6,13 +6,11 @@ import * as announceController from './announceController';
 import * as competitionController from './competitionController';
 import * as competitionFavourController from './competitionFavourController';
 import * as resourceController from './resourceController';
-import * as resourceFileController from './resourceFileController';
 import * as statusController from './statusController';
 export default {
   announceController,
   competitionController,
   competitionFavourController,
   resourceController,
-  resourceFileController,
   statusController,
 };

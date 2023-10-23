@@ -6,10 +6,11 @@ import {
   EllipsisOutlined,
   ExclamationCircleOutlined,
 } from '@ant-design/icons';
-import { Badge, Card, List, message, Tooltip } from 'antd';
+import { Badge, Button, Card, List, message, Tooltip } from 'antd';
 import Meta from 'antd/es/card/Meta';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'umi';
+import { history } from "@umijs/max";
 
 const MyTeamCard: React.FC = () => {
   const initSearchParam = {
@@ -43,7 +44,7 @@ const MyTeamCard: React.FC = () => {
   }, [searchParam]);
   return (
     <>
-      <Card>
+      <Card title='我的队伍' extra={<Button type='primary' onClick={() => {history.push('/team/add')}}>创建队伍</Button>}>
         <List
           grid={{ gutter: 22, column: 4 }}
           pagination={{

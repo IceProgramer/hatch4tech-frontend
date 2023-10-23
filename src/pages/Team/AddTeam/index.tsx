@@ -1,9 +1,9 @@
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { Card, message, Space, Typography, Upload, UploadFile, UploadProps } from 'antd';
+import { Card, message, Typography, Upload, UploadFile, UploadProps } from 'antd';
 import { RcFile, UploadChangeParam } from 'antd/es/upload';
+import React, { useEffect, useState } from 'react';
 
 const { Text } = Typography;
-import React, { useEffect, useState } from 'react';
 
 import FILE_STATUS from '@/enums/BizFileEnum';
 import { uploadFileUsingPOST } from '@/services/hatch4tech-biz/fileController';
@@ -26,7 +26,7 @@ import './index.less';
 const AddTeam: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
-  const [teamInfo, setTeamInfo] = useState<API.TeamVO>();
+  const [teamInfo] = useState<API.TeamVO>();
   const [competitionList, setCompetitionList] = useState<{ value: number; label: string }[]>();
   const [teacherList, setTeacherList] = useState<{ value: number; label: string }[]>();
 
@@ -110,10 +110,11 @@ const AddTeam: React.FC = () => {
           <ProForm
             name="validate_other"
             initialValues={teamInfo}
-            onFinish={async (value: API.TeamCreateRequest) => {
+            onFinish={async (value: any) => {
               const teamCreateRequest: API.TeamCreateRequest = {
                 ...value,
                 teamImg: imageUrl,
+                teacherIds: value.teacherIds?.map((id: string) => parseInt(id)),
               };
               const res = await createTeamUsingPOST(teamCreateRequest);
               if (res.code === 0) {
@@ -164,23 +165,16 @@ const AddTeam: React.FC = () => {
                 },
               ]}
             />
-            <Space>
-              <ProFormSelect
-                name="competitionId"
-                options={competitionList}
-                width="sm"
-                label="关联竞赛信息(选填)"
-              />
-              <ProFormSelect
-                name="teacherId"
-                options={teacherList}
-                width="sm"
-                label="指导教师(选填)"
-              />
-            </Space>
+            <ProFormSelect
+              name="teacherIds"
+              options={teacherList}
+              mode="multiple"
+              width="md"
+              label="指导教师(选填)"
+            />
             <ProFormDigit
               name="maxNum"
-              label="最大人数"
+              label="队伍人数"
               tooltip="队伍人数不能超过20人"
               width="sm"
               initialValue={3}

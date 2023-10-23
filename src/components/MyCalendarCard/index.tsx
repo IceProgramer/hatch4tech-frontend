@@ -16,7 +16,7 @@ const MyCalendarCard: React.FC = () => {
       <Card>
         <Space direction="horizontal" split={<Divider type="vertical" />}>
           <div style={wrapperStyle}>
-            <Calendar fullscreen={false} onPanelChange={onPanelChange} />
+            <Calendar fullscreen={false}  onPanelChange={onPanelChange} />
           </div>
         </Space>
       </Card>

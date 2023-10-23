@@ -1,12 +1,13 @@
-import { pageCompetitionUsingPOST } from '@/services/hatch4tech-competition/competitionController';
+import ProcessBadge from '@/components/ProcessBadge';
+import { pageActivityUsingPOST } from '@/services/hatch4tech-activity/activityController';
 import { history } from '@umijs/max';
-import { Badge, Card, Divider, List, message, Space, Typography } from 'antd';
+import { Card, Divider, Input, List, message, Space, Typography } from 'antd';
 import Meta from 'antd/es/card/Meta';
-import Search from 'antd/es/input/Search';
 import React, { useEffect, useState } from 'react';
 import './index.less';
-import ProcessBadge from "@/components/ProcessBadge";
-import { pageActivityUsingPOST } from "@/services/hatch4tech-activity/activityController";
+import dayjs from "dayjs";
+
+const { Search } = Input;
 
 const { Text } = Typography;
 
@@ -33,8 +34,6 @@ const ShowActivity: React.FC = () => {
     }
     setSearchLoading(false);
   };
-
-
 
   useEffect(() => {
     getActivityList();
@@ -76,35 +75,42 @@ const ShowActivity: React.FC = () => {
           dataSource={activityList}
           renderItem={(activityVO: API.ActivityVO) => (
             <List.Item>
-              <Card
-                onClick={() => {
-                  history.push(`/activity/info/${activityVO.id}`);
-                }}
-                hoverable
-                cover={
-                  <img
-                    alt={activityVO.activityName}
-                    height={180}
-                    width={240}
-                    src={activityVO.activityImg}
-                  />
-                }
-              >
-                <Meta
-                  title={
-                    <Space>
+                <Card
+                  onClick={() => {
+                    history.push(`/activity/info/${activityVO.id}`);
+                  }}
+                  hoverable
+                  cover={
+                    <img
+                      alt={activityVO.activityName}
+                      height={180}
+                      width={240}
+                      src={activityVO.activityImg}
+                    />
+                  }
+                >
+                  <Meta
+                    title={
                       <Text style={{ maxWidth: '100%' }} ellipsis>
                         {activityVO.activityName}
                       </Text>
-                      <ProcessBadge
-                        startTime={activityVO.startTime}
-                        endTime={activityVO.endTime}
-                      />
-                    </Space>
-                  }
-                  description={`${activityVO.startTime} ~ ${activityVO.endTime}`}
-                />
-              </Card>
+                    }
+                    description={
+                      <Space direction="vertical">
+                        <div>
+                          <Text>状态：</Text>
+                          <ProcessBadge
+                            startTime={activityVO.startTime}
+                            endTime={activityVO.endTime}
+                          />
+                        </div>
+                        <div>
+                          {activityVO.startTime} ~ {activityVO.endTime}
+                        </div>
+                      </Space>
+                    }
+                  />
+                </Card>
             </List.Item>
           )}
         />

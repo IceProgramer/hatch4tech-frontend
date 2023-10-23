@@ -1,5 +1,4 @@
 import CompetitionDetailCard from '@/components/Competition/CompetitionDetailCard';
-import MyTeamCard from '@/components/MyTeamCard';
 import { getCompetitionVOByIdUsingGET } from '@/services/hatch4tech-competition/competitionController';
 import { BulbTwoTone, NotificationTwoTone, ProjectTwoTone } from '@ant-design/icons';
 import { useParams } from '@umijs/max';
@@ -60,7 +59,7 @@ const CompetitionInfo: React.FC = () => {
                         比赛报名
                       </span>
                     ),
-                    children: <CompetitionSignUpCard />,
+                    children: <CompetitionSignUpCard competition={competition} />,
                   },
                   {
                     key: '3',

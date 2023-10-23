@@ -47,6 +47,17 @@ export async function getActivityVOByIdUsingGET(
   });
 }
 
+/** getActivityVOList GET /hatch4tech-activity/activity/activity/get/list */
+export async function getActivityVOListUsingGET(options?: { [key: string]: any }) {
+  return request<API.BaseResponseListActivityVO_>(
+    '/hatch4tech-activity/activity/activity/get/list',
+    {
+      method: 'GET',
+      ...(options || {}),
+    },
+  );
+}
+
 /** pageActivity POST /hatch4tech-activity/activity/activity/page/list */
 export async function pageActivityUsingPOST(
   body: API.ActivityQueryRequest,

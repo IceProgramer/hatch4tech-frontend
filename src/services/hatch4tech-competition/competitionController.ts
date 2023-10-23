@@ -93,6 +93,24 @@ export async function getResourceTypeListUsingGET(options?: { [key: string]: any
   );
 }
 
+/** teamSignCompetition POST /hatch4tech-competition/competition/competition/team/sign */
+export async function teamSignCompetitionUsingPOST(
+  body: API.CompetitionSignRequest,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseBoolean_>(
+    '/hatch4tech-competition/competition/competition/team/sign',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: body,
+      ...(options || {}),
+    },
+  );
+}
+
 /** updateCompetition POST /hatch4tech-competition/competition/competition/update */
 export async function updateCompetitionUsingPOST(
   body: API.CompetitionUpdateRequest,

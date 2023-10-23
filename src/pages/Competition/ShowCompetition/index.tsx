@@ -1,12 +1,12 @@
 import ProcessBadge from '@/components/ProcessBadge';
 import { pageCompetitionUsingPOST } from '@/services/hatch4tech-competition/competitionController';
 import { history } from '@umijs/max';
-import { Card, Divider, List, message, Space, Typography } from 'antd';
+import { Card, Divider, Input, List, message, Space, Typography } from 'antd';
 import Meta from 'antd/es/card/Meta';
-import Search from 'antd/es/input/Search';
 import React, { useEffect, useState } from 'react';
 import './index.less';
-import { EditOutlined, SettingOutlined } from "@ant-design/icons";
+const { Search } = Input;
+
 
 const { Text } = Typography;
 

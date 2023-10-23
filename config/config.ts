@@ -1,6 +1,5 @@
 // https://umijs.org/config/
 import { defineConfig } from '@umijs/max';
-import { join } from 'path';
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
 import routes from './routes';
@@ -131,46 +130,46 @@ export default defineConfig({
     // {
     //   requestLibPath: "import { request } from '@umijs/max'",
     //   // 或者使用在线的版本
-    //   schemaPath: "http://localhost:88/hatch4tech-user/v2/api-docs",
+    //   schemaPath: 'http://localhost:88/hatch4tech-user/v2/api-docs',
     //   // schemaPath: join(__dirname, 'oneapi.json'),
-    //   projectName: "hatch4tech-user",
+    //   projectName: 'hatch4tech-user',
     //   mock: false,
     // },
     // {
     //   requestLibPath: "import { request } from '@umijs/max'",
     //   // 或者使用在线的版本
-    //   schemaPath: "http://localhost:88/hatch4tech-team/v2/api-docs",
+    //   schemaPath: 'http://localhost:88/hatch4tech-team/v2/api-docs',
     //   // schemaPath: join(__dirname, 'oneapi.json'),
-    //   projectName: "hatch4tech-team",
+    //   projectName: 'hatch4tech-team',
     //   mock: false,
     // },
     // {
     //   requestLibPath: "import { request } from '@umijs/max'",
     //   // 或者使用在线的版本
-    //   schemaPath: "http://localhost:88/hatch4tech-auth/v2/api-docs",
+    //   schemaPath: 'http://localhost:88/hatch4tech-auth/v2/api-docs',
     //   // schemaPath: join(__dirname, 'oneapi.json'),
-    //   projectName: "hatch4tech-auth",
+    //   projectName: 'hatch4tech-auth',
     //   mock: false,
     // },
     // {
     //   requestLibPath: "import { request } from '@umijs/max'",
     //   // 或者使用在线的版本
-    //   schemaPath: "http://localhost:88/hatch4tech-activity/v2/api-docs",
-    //   projectName: "hatch4tech-activity",
+    //   schemaPath: 'http://localhost:88/hatch4tech-activity/v2/api-docs',
+    //   projectName: 'hatch4tech-activity',
     //   mock: false,
     // },
-    {
-      requestLibPath: "import { request } from '@umijs/max'",
-      // 或者使用在线的版本
-      schemaPath: "http://localhost:88/hatch4tech-competition/v2/api-docs",
-      projectName: "hatch4tech-competition",
-      mock: false,
-    },
     // {
     //   requestLibPath: "import { request } from '@umijs/max'",
     //   // 或者使用在线的版本
-    //   schemaPath: "http://localhost:88/hatch4tech-biz/v2/api-docs",
-    //   projectName: "hatch4tech-biz",
+    //   schemaPath: 'http://localhost:88/hatch4tech-competition/v2/api-docs',
+    //   projectName: 'hatch4tech-competition',
+    //   mock: false,
+    // },
+    // {
+    //   requestLibPath: "import { request } from '@umijs/max'",
+    //   // 或者使用在线的版本
+    //   schemaPath: 'http://localhost:88/hatch4tech-biz/v2/api-docs',
+    //   projectName: 'hatch4tech-biz',
     //   mock: false,
     // },
   ],

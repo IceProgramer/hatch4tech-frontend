@@ -10,6 +10,8 @@ const ProcessBadge: React.FC<Props> = (competitionTime: any) => {
   const startTime = new Date(competitionTime.startTime);
   const endTime = new Date(competitionTime.endTime);
   const currentTime = new Date();
+  console.log(currentTime)
+  console.log(endTime)
   if (currentTime < startTime) {
     return <Badge status="default" text="未开始" />;
   }

@@ -5,8 +5,8 @@ import React from 'react';
 const TODO: React.FC = () => {
   return (
     <Result
-      status="404"
-      title="程序员还在加班制作"
+      status="403"
+      title="页面暂未开放"
       extra={
         <Button type="primary" onClick={() => history.push('/')}>
           返回首页

@@ -19,9 +19,9 @@ import {
   ProFormTextArea,
   StepsForm,
 } from '@ant-design/pro-components';
+import { history } from '@umijs/max';
 import { Button, message, Space } from 'antd';
 import { useEffect, useRef, useState } from 'react';
-import { history } from "@@/core/history";
 
 interface honorType {
   honor: string;
@@ -36,8 +36,8 @@ export default () => {
   const [politicsList, setPoliticsList] = useState<{ value: number; label: string }[]>();
   const [studentWishList, setStudentWishList] = useState<{ value: number; label: string }[]>();
   const [studentPlanList, setStudentPlanList] = useState<{ value: number; label: string }[]>();
-  const [honorList, setHonorList] = useState<string[]>(['']);
-  const [expList, setExpList] = useState<string[]>(['']);
+  const [userAccount, setUserAccount] = useState<string>();
+  // const [studentNumber, setStudentNumber] = useState<string>();
 
   const actionRef = useRef<
     FormListActionType<{
@@ -117,19 +117,22 @@ export default () => {
     <ProCard>
       <StepsForm<{
         name: string;
+        studentExp: { experience: string }[];
+        studentHonor: { honor: string }[];
       }>
         onFinish={async (values) => {
-          // await waitTime(1000);
           const studentRegister: API.StudentRegisterRequest = {
             ...values,
-            studentHonor: honorList,
-            studentExp: expList,
+            studentHonor: values.studentHonor.map((honor) => honor.honor),
+            studentExp: values.studentExp.map((exp) => exp.experience),
+            userAccount: userAccount,
           };
+
           console.log(studentRegister);
           const res = await newStudentRegisterUsingPOST(studentRegister);
           if (res.data) {
             message.success('提交成功');
-            history.push('/user/user/login');
+            history.push('/user/login');
           }
         }}
         formProps={{
@@ -176,6 +179,9 @@ export default () => {
           name="checkUser"
           title="用户核实"
           onFinish={async ({ studentNumber, userName }) => {
+            // setStudentName(studentName)
+            setUserAccount('Hdu' + studentNumber);
+            // setStudentNumber(studentNumber);
             console.log(studentNumber, userName);
             const res = await checkStudentNumberUsingPOST({ studentNumber, userName });
             return res.code === 0;
@@ -278,6 +284,7 @@ export default () => {
             />
           </Space>
         </StepsForm.StepForm>
+
         <StepsForm.StepForm<{
           checkbox: string;
         }>
@@ -288,14 +295,15 @@ export default () => {
             name="userAccount"
             label="账号"
             placeholder="请输入账号"
-            tooltip="1. 用户账号不能为纯数字 2. 由数字字母（不包含特殊字符） 4-16位组成"
-            rules={[
-              {
-                required: true,
-                message: '账号格式错误',
-                pattern: /^[A-z][A-z0-9]{3,15}/,
-              },
-            ]}
+            disabled
+            // tooltip="1. 用户账号不能为纯数字 2. 由数字字母（不包含特殊字符） 4-16位组成"
+            // rules={[
+            //   {
+            //     required: true,
+            //     message: '账号格式错误',
+            //     pattern: /^[A-z][A-z0-9]{3,15}/,
+            //   },
+            // ]}
           />
           <ProFormText.Password
             name="userPassword"
@@ -333,13 +341,8 @@ export default () => {
           name="personalization"
           title="个性化设置"
           onFinish={async ({ studentHonor, studentExp }) => {
-            // console.log(studentHonor);
-            const honorList = studentHonor.map((honor) => honor.honor);
-            setHonorList(honorList);
-            const expList = studentExp.map((exp) => exp.experience);
-            setExpList(expList);
-            console.log(honorList);
-            console.log(expList);
+            console.log(studentHonor);
+            console.log(studentExp);
           }}
         >
           <ProFormCheckbox.Group
@@ -379,13 +382,15 @@ export default () => {
               placeholder="输入荣誉（例子：服务外包大赛全国一等奖）"
             />
           </ProFormList>
-
           <ProFormList
             copyIconProps={{
               Icon: SnippetsOutlined,
             }}
             deleteIconProps={{
               Icon: CloseOutlined,
+            }}
+            onAfterAdd={(value) => {
+              console.log(value);
             }}
             min={1}
             max={8}
@@ -394,7 +399,7 @@ export default () => {
             label="个人经验"
             initialValue={[
               {
-                honor: '',
+                experience: '',
               },
             ]}
           >

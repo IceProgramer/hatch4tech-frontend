@@ -35,6 +35,7 @@
     name: '竞赛相关',
     icon: 'StarOutlined',
     component: './Competition/ShowCompetition',
+    // redirect: '/todo',
   },
   {
     path: '/competition/info/:id',
@@ -58,21 +59,30 @@
     path: '/college',
     name: '学院立项',
     icon: 'InboxOutlined',
+    component: './Project/ShowProject',
+  },
+  {
+    path: '/college/publicity/info/:id',
+    hideInMenu: true,
+    name: '公示详情',
+    component: './Project/ProjectInfo',
+  },
+  {
+    path: '/team/show',
+    name: '组队频道',
+    icon: 'TeamOutlined',
     redirect: '/todo',
+    // component: './Team/ShowTeam'
   },
   {
     path: '/team',
-    name: '组队频道',
-    icon: 'TeamOutlined',
+    name: '组队相关',
+    hideInMenu: true,
     routes: [
-      {
-        path: '/team/show',
-        name: '队伍展示',
-        component: './Team/ShowTeam',
-      },
       {
         path: '/team/add',
         name: '创建队伍',
+        hideInMenu: true,
         component: './Team/AddTeam',
       },
       {
@@ -96,6 +106,12 @@
     redirect: '/todo',
   },
   {
+    path: '/develop',
+    name: '开发团队',
+    icon: 'ToolOutlined',
+    redirect: '/todo',
+  },
+  {
     path: '/user/center',
     name: '个人中心',
     hideInMenu: true,
@@ -104,8 +120,12 @@
         path: '/user/center',
         component: './UserCenter',
       },
+      {
+        path: '/user/center/info',
+        component: './UserInfo',
+      },
     ],
   },
   { path: '*', name: '404', layout: false, component: './404' },
-  { path: '/todo', name: '正在制作', hideInMenu: true, component: './TODO' },
+  { path: '/todo', hideInMenu: true, name: '正在制作', component: './TODO' },
 ];

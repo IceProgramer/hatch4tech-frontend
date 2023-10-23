@@ -1,33 +1,33 @@
 import TEAM_STATUS from '@/enums/TeamStatusEnum';
 import { getTeamInfoPageUsingPOST } from '@/services/hatch4tech-team/teamController';
 import { CheckCard, ProDescriptions } from '@ant-design/pro-components';
-import { history,useModel } from '@umijs/max';
+import { history, useModel } from '@umijs/max';
 import {
-Avatar,
-Badge,
-Button,
-Card,
-Carousel,
-Col,
-Divider,
-List,
-message,
-Modal,
-Row,
-SelectProps,
-Space,
-Tag,
-Tooltip,
-Typography
+  Avatar,
+  Badge,
+  Button,
+  Card,
+  Carousel,
+  Col,
+  Divider, Input,
+  List,
+  message,
+  Modal,
+  Row,
+  Space,
+  Tag,
+  Tooltip,
+  Typography,
 } from 'antd';
 
+import { applyJoinTeamUsingPOST } from '@/services/hatch4tech-team/teamUserController';
 import Meta from 'antd/es/card/Meta';
-import Search from 'antd/es/input/Search';
 import CheckableTag from 'antd/es/tag/CheckableTag';
 import Paragraph from 'antd/lib/typography/Paragraph';
-import React,{ ReactNode,useEffect,useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { Link } from 'umi';
-import { applyJoinTeamUsingPOST } from "@/services/hatch4tech-team/teamUserController";
+const { Search } = Input;
+
 
 const { Text } = Typography;
 
@@ -78,20 +78,11 @@ const rightCarousel = (
   </Card>
 );
 
-const competitionList: SelectProps['options'] = [];
-
 const ShowTeam: React.FC = () => {
   const initSearchParam = {
     current: 1,
     pageSize: 8,
   };
-
-  for (let i = 10; i < 36; i++) {
-    competitionList.push({
-      value: i,
-      label: i.toString(36) + i,
-    });
-  }
 
   const [searchParam, setSearchParam] = useState<API.TeamQueryRequest>({ ...initSearchParam });
   const [teamData, setTeamData] = useState<API.TeamVO[]>();
@@ -102,7 +93,7 @@ const ShowTeam: React.FC = () => {
   const [searchLoading, setSearchLoading] = useState<boolean>(false);
   const [open, setOpen] = useState(false);
   const [modalData, setModalData] = useState<API.TeamVO>();
-  const [tagId, setTagId] = useState<number>()
+  const [tagId, setTagId] = useState<number>();
 
   /**
    * 获取队伍信息
@@ -160,7 +151,13 @@ const ShowTeam: React.FC = () => {
                   ))}
                 </Avatar.Group>
               ),
-              teacher: <Link to="/teacher">{teamVO.teacherInfo?.teacherName ?? '暂无'}</Link>,
+              teacher: teamVO.teacherInfoList?.map((teacherVO) => (
+                <Link key={teacherVO.userId} to={'/teacher'}>
+                  <Tag color="#87d068">
+                    {teacherVO.teacherName}
+                  </Tag>
+                </Link>
+              )),
               teamTag: (
                 <Space size={[0, 8]} wrap>
                   {teamVO.teamTags?.map((tag) => (
@@ -306,7 +303,7 @@ const ShowTeam: React.FC = () => {
                 <Card style={{ marginTop: '5px' }}>
                   <List.Item
                     key={item.teamId}
-                    extra={<img width={150} alt="logo" src={item.teamImg} />}
+                    extra={<img width={230} alt="logo" src={item.teamImg} />}
                   >
                     <List.Item.Meta
                       title={<a onClick={() => changeTeam(item)}>{item.teamName}</a>}
@@ -437,11 +434,11 @@ const ShowTeam: React.FC = () => {
           onOk={async () => {
             const joinTeamRequest: API.JoinTeamRequest = {
               tagId: tagId,
-              teamId: modalData?.teamId
-            }
+              teamId: modalData?.teamId,
+            };
             const res = await applyJoinTeamUsingPOST(joinTeamRequest);
             if (res.code === 0) {
-              message.success("申请队伍成功")
+              message.success('申请队伍成功');
               setOpen(false);
             }
           }}
@@ -449,7 +446,7 @@ const ShowTeam: React.FC = () => {
         >
           <CheckCard.Group
             onChange={(value) => {
-              const tagIdStr = (value ?? '').toString()
+              const tagIdStr = (value ?? '').toString();
               setTagId(parseInt(tagIdStr));
             }}
           >

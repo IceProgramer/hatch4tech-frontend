@@ -2,15 +2,8 @@ import Footer from '@/components/Footer';
 import { getFakeCaptcha } from '@/services/ant-design-pro/login';
 import { userLoginUsingPOST } from '@/services/hatch4tech-auth/loginController';
 import { getCurrentUserUsingGET } from '@/services/hatch4tech-user/userController';
-import { Link } from '@@/exports';
-import {
-  AlipayCircleOutlined,
-  LockOutlined,
-  MobileOutlined,
-  TaobaoCircleOutlined,
-  UserOutlined,
-  WeiboCircleOutlined,
-} from '@ant-design/icons';
+import { Helmet, Link } from '@@/exports';
+import { LockOutlined, MobileOutlined, UserOutlined } from '@ant-design/icons';
 import {
   LoginForm,
   ProFormCaptcha,
@@ -18,11 +11,12 @@ import {
   ProFormText,
 } from '@ant-design/pro-components';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
-import { Helmet, history, useModel } from '@umijs/max';
+import { history, useModel } from '@umijs/max';
 import { Alert, Col, Divider, message, Row, Space, Tabs } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { flushSync } from 'react-dom';
 import Settings from '../../../../config/defaultSettings';
+// import { history } from "@umijs/max";
 
 const LoginMessage: React.FC<{
   content: string;
@@ -41,6 +35,7 @@ const LoginMessage: React.FC<{
 const Login: React.FC = () => {
   const [userLoginState] = useState<API.LoginResult>({});
   const [type, setType] = useState<string>('account');
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const { setInitialState } = useModel('@@initialState');
   const containerClassName = useEmotionCss(() => {
     return {
@@ -61,7 +56,7 @@ const Login: React.FC = () => {
     const userInfo = await getCurrentUserUsingGET();
     if (userInfo) {
       flushSync(() => {
-        setInitialState((s) => ({
+        setInitialState((s: any) => ({
           ...s,
           currentUser: userInfo.data,
         }));
@@ -81,7 +76,7 @@ const Login: React.FC = () => {
         const defaultLoginSuccessMessage = '登录成功！';
         message.success(defaultLoginSuccessMessage);
         if (res?.data?.accessToken) {
-          localStorage.setItem("accessToken", res.data.accessToken);
+          localStorage.setItem('accessToken', res.data.accessToken);
         }
         await fetchUserInfo();
         const urlParams = new URL(window.location.href).searchParams;
@@ -137,6 +132,7 @@ const Login: React.FC = () => {
               {
                 key: 'mobile',
                 label: '手机号登录',
+                disabled: true,
               },
             ]}
           />
@@ -148,7 +144,7 @@ const Login: React.FC = () => {
                   size: 'large',
                   prefix: <UserOutlined />,
                 }}
-                placeholder={'请输入 用户名/邮箱/手机号'}
+                placeholder={'请输入学号'}
                 rules={[
                   {
                     required: true,

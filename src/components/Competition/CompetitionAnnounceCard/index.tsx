@@ -23,7 +23,9 @@ const CompetitionAnnounceCard: React.FC<Props> = (props) => {
           setCompetitionAnnounce(res.data);
         }
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   useEffect(() => {
