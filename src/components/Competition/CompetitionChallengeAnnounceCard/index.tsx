@@ -1,15 +1,9 @@
-import { getAnnounceByIdUsingGET } from '@/services/hatch4tech-competition/announceController';
 import { ProColumns, ProTable } from '@ant-design/pro-components';
-import { history } from '@umijs/max';
-import { Button, Card, Divider, Result, Tag, Typography } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { Card, Divider, Tag, Typography } from 'antd';
+import React from 'react';
 import './index.less';
 
 const { Paragraph, Title } = Typography;
-
-interface Props {
-  competitionId: number;
-}
 
 type CompetitionTeamItem = {
   id: number;
@@ -17,30 +11,13 @@ type CompetitionTeamItem = {
   projectType: string;
   instituteName: string;
   projectClass: string;
-  teamNum: number;
+  price: any;
   teacherNum: number;
   userName: string;
-  userPhone: string;
   teamMember: string[];
 };
 
-const CompetitionAnnounceCard: React.FC<Props> = (props) => {
-  const { competitionId } = props;
-  const [competitionAnnounce, setCompetitionAnnounce] = useState<API.AnnounceVO>();
-
-  const getCompetitionAnnounce = async () => {
-    try {
-      const res = await getAnnounceByIdUsingGET({ competitionId });
-      if (res.code === 0) {
-        if (res.data) {
-          setCompetitionAnnounce(res.data);
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+const CompetitionChallengeAnnounceCard: React.FC = () => {
   const columns: ProColumns<CompetitionTeamItem>[] = [
     {
       title: '作品名称',
@@ -60,9 +37,10 @@ const CompetitionAnnounceCard: React.FC<Props> = (props) => {
       align: 'center',
     },
     {
-      title: '团队学生人数',
-      dataIndex: 'teamNum',
+      title: '获奖情况',
+      dataIndex: 'price',
       align: 'center',
+      width: '10%',
     },
     {
       title: '指导老师数',
@@ -75,13 +53,6 @@ const CompetitionAnnounceCard: React.FC<Props> = (props) => {
       valueType: 'text',
       align: 'center',
     },
-    {
-      title: '负责人联系方式',
-      dataIndex: 'userPhone',
-      valueType: 'text',
-      align: 'center',
-    },
-
     {
       title: '团队其他成员姓名',
       key: 'tags',
@@ -103,10 +74,9 @@ const CompetitionAnnounceCard: React.FC<Props> = (props) => {
       projectType: '普通高校',
       instituteName: '圣光机学院',
       projectClass: 'E. 文化创意和区域合作',
-      teamNum: 10,
+      price: <Tag color="red">一等奖</Tag>,
       teacherNum: 3,
       userName: '王则昊',
-      userPhone: '17858643633',
       teamMember: [
         '翁文超',
         '陈琪凯',
@@ -125,10 +95,9 @@ const CompetitionAnnounceCard: React.FC<Props> = (props) => {
       projectType: '普通高校',
       instituteName: '圣光机学院',
       projectClass: 'C. 数字化改革和城市治理',
-      teamNum: 10,
+      price: <Tag color="blue">二等奖</Tag>,
       teacherNum: 3,
       userName: '陈一飞',
-      userPhone: '15228772315',
       teamMember: [
         '邹槟峰',
         '吴越',
@@ -147,16 +116,10 @@ const CompetitionAnnounceCard: React.FC<Props> = (props) => {
       projectType: '普通高校',
       instituteName: '圣光机学院',
       projectClass: 'A. 科技创新和未来产业',
-      teamNum: 5,
+      price: <Tag color="blue">二等奖</Tag>,
       teacherNum: 3,
       userName: '陈章昊',
-      userPhone: '13777862746',
-      teamMember: [
-        '方昭杰',
-        '于馨童',
-        '尹与同',
-        '张晨焱',
-      ],
+      teamMember: ['方昭杰', '于馨童', '尹与同', '张晨焱'],
     },
     {
       id: 4,
@@ -164,10 +127,9 @@ const CompetitionAnnounceCard: React.FC<Props> = (props) => {
       projectType: '普通高校',
       instituteName: '圣光机学院',
       projectClass: 'B. 共同富裕和乡村振兴',
-      teamNum: 10,
+      price: <Tag color="green">三等奖</Tag>,
       teacherNum: 2,
       userName: '郭鸿宇',
-      userPhone: '13394098821',
       teamMember: [
         '郭鸿宇',
         '李浩阳',
@@ -186,10 +148,9 @@ const CompetitionAnnounceCard: React.FC<Props> = (props) => {
       projectType: '普通高校',
       instituteName: '圣光机学院',
       projectClass: 'B. 共同富裕和乡村振兴',
-      teamNum: 10,
+      price: <Tag color="green">三等奖</Tag>,
       teacherNum: 2,
       userName: '陈嘉翰',
-      userPhone: '13706531210',
       teamMember: [
         '陈东亮',
         '方昭杰',
@@ -208,10 +169,9 @@ const CompetitionAnnounceCard: React.FC<Props> = (props) => {
       projectType: '普通高校',
       instituteName: '圣光机学院',
       projectClass: 'A. 科技创新和未来产业',
-      teamNum: 10,
+      price: <Tag color="green">三等奖</Tag>,
       teacherNum: 1,
       userName: '熊能',
-      userPhone: '19357523582',
       teamMember: [
         '谢盛',
         '黄子豪',
@@ -230,17 +190,10 @@ const CompetitionAnnounceCard: React.FC<Props> = (props) => {
       projectType: '普通高校',
       instituteName: '圣光机学院',
       projectClass: 'E. 文化创意和区域合作',
-      teamNum: 6,
+      price: <Tag color="purple">参与奖</Tag>,
       teacherNum: 1,
       userName: '程佳',
-      userPhone: '19357510418',
-      teamMember: [
-        '周光哲',
-        '仲书晗',
-        '陈琪凯',
-        '沈泽宇',
-        '马宁蔚',
-      ],
+      teamMember: ['周光哲', '仲书晗', '陈琪凯', '沈泽宇', '马宁蔚'],
     },
     {
       id: 8,
@@ -248,18 +201,10 @@ const CompetitionAnnounceCard: React.FC<Props> = (props) => {
       projectType: '普通高校',
       instituteName: '圣光机学院',
       projectClass: 'C. 数字化改革和城市治理',
-      teamNum: 7,
+      price: <Tag color="purple">参与奖</Tag>,
       teacherNum: 2,
       userName: '余潇',
-      userPhone: '18108191617',
-      teamMember: [
-        '吴之豪',
-        '赫婧祺',
-        '仇峻韬',
-        '何金森',
-        '陈琪凯',
-        '孙逸飞',
-      ],
+      teamMember: ['吴之豪', '赫婧祺', '仇峻韬', '何金森', '陈琪凯', '孙逸飞'],
     },
     {
       id: 9,
@@ -267,19 +212,10 @@ const CompetitionAnnounceCard: React.FC<Props> = (props) => {
       projectType: '普通高校',
       instituteName: '圣光机学院',
       projectClass: 'A. 科技创新和未来产业',
-      teamNum: 8,
+      price: <Tag color="purple">参与奖</Tag>,
       teacherNum: 0,
       userName: '沈曹祎',
-      userPhone: '18329102330',
-      teamMember: [
-        '戴彧',
-        '濮乐意',
-        '陈嘉翰',
-        '王志鹏',
-        '蔡轩昊',
-        '陈景阳',
-        '董沥琪',
-      ],
+      teamMember: ['戴彧', '濮乐意', '陈嘉翰', '王志鹏', '蔡轩昊', '陈景阳', '董沥琪'],
     },
     {
       id: 10,
@@ -287,85 +223,48 @@ const CompetitionAnnounceCard: React.FC<Props> = (props) => {
       projectType: '普通高校',
       instituteName: '圣光机学院',
       projectClass: 'C. 数字化改革和城市治理',
-      teamNum: 6,
+      price: <Tag color="purple">参与奖</Tag>,
       teacherNum: 1,
       userName: '张轩豪',
-      userPhone: '18757656837',
-      teamMember: [
-        '刘嘉寓',
-        '杨睿涵',
-        '陈嘉翰',
-        '上官于笑',
-        '刘婷',
-      ],
+      teamMember: ['刘嘉寓', '杨睿涵', '陈嘉翰', '上官于笑', '刘婷'],
     },
   ];
 
-  useEffect(() => {
-    getCompetitionAnnounce().then();
-  }, []);
   return (
     <>
-      {competitionAnnounce ? (
-        <div className="competitionDetail">
-          <Divider orientation="left">结果公示</Divider>
-          <Card>
-            <Typography style={{ width: '100%' }}>
-              <Title level={3} style={{ textAlign: 'center', color: 'red' }}>
-                {competitionAnnounce.announceName}
-              </Title>
-              <Paragraph style={{ marginTop: 50 }}>{competitionAnnounce.announceContent}</Paragraph>
-              {/*<Link*/}
-              {/*  style={{ marginTop: 100 }}*/}
-              {/*  href={competitionAnnounce.announceFile}*/}
-              {/*  target="_blank"*/}
-              {/*>*/}
-              {/*  <Space style={{ marginTop: 50 }}>*/}
-              {/*    <DownloadOutlined />*/}
-              {/*    <span>附件:{competitionAnnounce.announceName}</span>*/}
-              {/*  </Space>*/}
-              {/*</Link>*/}
-              <ProTable<CompetitionTeamItem>
-                columns={columns}
-                dataSource={competitionTeamList as CompetitionTeamItem[]}
-                rowKey="id"
-                search={false}
-                pagination={false}
-                form={{
-                  ignoreRules: false,
-                }}
-                dateFormatter="string"
-                // headerTitle="高级表格"
-              />
-              <Paragraph style={{ marginTop: 10, textAlign: 'end' }}>
-                {competitionAnnounce.announceFrom}
-              </Paragraph>
-              <Paragraph style={{ marginTop: 10, textAlign: 'end' }}>
-                {competitionAnnounce.publishTime}
-              </Paragraph>
-            </Typography>
-          </Card>
-        </div>
-      ) : (
+      <div className="competitionDetail">
+        <Divider orientation="left">结果公示</Divider>
         <Card>
-          <Result
-            status="404"
-            title="暂无公示信息发布"
-            extra={
-              <Button
-                type="primary"
-                onClick={() => {
-                  history.go(-1);
-                }}
-              >
-                返回上一页
-              </Button>
-            }
-          />
+          <Typography style={{ width: '100%' }}>
+            <Title level={3} style={{ textAlign: 'center', color: 'red' }}>
+              挑战杯公示
+            </Title>
+            <Paragraph style={{ marginTop: 50 }}>
+              各单位 :
+              2023年度挑战杯竞赛经过学院内的专家评比审议，确定了2023年 挑战杯 竞赛各获奖奖项
+              等级，详细情况见附件。现将获奖信息予以公示
+            </Paragraph>
+            <Paragraph style={{ marginTop: 10, textAlign: 'end' }}>
+              杭州电子科技大学圣光机学院
+            </Paragraph>
+            <Paragraph style={{ marginTop: 10, textAlign: 'end' }}>2023年10月28日</Paragraph>
+            <ProTable<CompetitionTeamItem>
+              columns={columns}
+              dataSource={competitionTeamList as CompetitionTeamItem[]}
+              rowKey="id"
+              search={false}
+              pagination={false}
+              form={{
+                ignoreRules: false,
+              }}
+              dateFormatter="string"
+              // headerTitle="高级表格"
+            />
+          </Typography>
         </Card>
-      )}
+      </div>
     </>
   );
 };
 
-export default CompetitionAnnounceCard;
+export default CompetitionChallengeAnnounceCard;

@@ -31,7 +31,7 @@ const ShowCompetition: React.FC = () => {
         setTotal(res.data?.total ?? 0);
       }
     } catch (error: any) {
-      message.error('获取队伍失败' + error.message);
+      console.log(error)
     }
     setSearchLoading(false);
   };

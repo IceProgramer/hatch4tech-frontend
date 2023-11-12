@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react';
 import './index.less';
 import CompetitionAnnounceCard from "@/components/Competition/CompetitionAnnounceCard";
 import CompetitionSignUpCard from "@/components/Competition/CompetitionSignUpCard";
+import CompetitionChallengeAnnounceCard from "@/components/Competition/CompetitionChallengeAnnounceCard";
 
 
 const CompetitionInfo: React.FC = () => {
@@ -69,7 +70,8 @@ const CompetitionInfo: React.FC = () => {
                         结果公示
                       </span>
                     ),
-                    children: <CompetitionAnnounceCard competitionId={competition.id ?? 0} />,
+                    // : <CompetitionAnnounceCard competitionId={competition.id ?? 0} />,
+                    children: <CompetitionChallengeAnnounceCard  />
                   },
                 ]}
               />

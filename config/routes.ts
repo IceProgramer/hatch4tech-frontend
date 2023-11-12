@@ -103,7 +103,8 @@
     path: '/shop',
     name: '积分商城',
     icon: 'ShoppingCartOutlined',
-    redirect: '/todo',
+    // redirect: '/todo',
+    component: './Shop/ShowProduct',
   },
   {
     path: '/develop',

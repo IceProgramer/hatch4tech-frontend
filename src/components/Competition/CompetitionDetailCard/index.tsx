@@ -66,17 +66,17 @@ const CompetitionDetailCard: React.FC<Props> = (props) => {
                 title={
                   <Space>
                     <span>{competition?.competitionName}</span>
-                    <Space.Compact block>
-                      <Tooltip title={hasFavour ? '取消收藏' : '收藏'}>
-                        <Button loading={loading} onClick={starCompetition}>
-                          {hasFavour ? <StarFilled /> : <StarOutlined />}
-                          <span>{favourNum}</span>
-                        </Button>
-                      </Tooltip>
-                      <Tooltip title="分享">
-                        <Button icon={<ShareAltOutlined />} />
-                      </Tooltip>
-                    </Space.Compact>
+                    {/*<Space.Compact block>*/}
+                    {/*  <Tooltip title={hasFavour ? '取消收藏' : '收藏'}>*/}
+                    {/*    <Button loading={loading} onClick={starCompetition}>*/}
+                    {/*      {hasFavour ? <StarFilled /> : <StarOutlined />}*/}
+                    {/*      <span>{favourNum}</span>*/}
+                    {/*    </Button>*/}
+                    {/*  </Tooltip>*/}
+                    {/*  <Tooltip title="分享">*/}
+                    {/*    <Button icon={<ShareAltOutlined />} />*/}
+                    {/*  </Tooltip>*/}
+                    {/*</Space.Compact>*/}
                   </Space>
                 }
                 size="small"

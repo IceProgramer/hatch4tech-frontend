@@ -475,17 +475,21 @@ declare namespace API {
   };
 
   type UserBasicInfoBO = {
+    exchangeNum?: number;
     userAccount?: string;
     userAvatar?: string;
     userId?: number;
     userName?: string;
+    userPoints?: number;
   };
 
   type UserInfoInTokenBO = {
+    exchangeNum?: number;
     userAccount?: string;
     userAvatar?: string;
     userId?: number;
     userName?: string;
+    userPoints?: number;
     userRole?: number;
   };
 

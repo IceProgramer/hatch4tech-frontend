@@ -49,7 +49,7 @@ const CompetitionSignUpCard: React.FC<Props> = (props) => {
   };
 
   useEffect(() => {
-    getCompetitionTeamList();
+    // getCompetitionTeamList();
   }, [searchParam]);
 
   const items: StepProps[] = competition.statusList?.map((item) => ({

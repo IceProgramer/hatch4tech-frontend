@@ -127,14 +127,14 @@ export default defineConfig({
    * @doc https://pro.ant.design/zh-cn/docs/openapi/
    */
   openAPI: [
-    // {
-    //   requestLibPath: "import { request } from '@umijs/max'",
-    //   // 或者使用在线的版本
-    //   schemaPath: 'http://localhost:88/hatch4tech-user/v2/api-docs',
-    //   // schemaPath: join(__dirname, 'oneapi.json'),
-    //   projectName: 'hatch4tech-user',
-    //   mock: false,
-    // },
+    {
+      requestLibPath: "import { request } from '@umijs/max'",
+      // 或者使用在线的版本
+      schemaPath: 'http://localhost:88/hatch4tech-user/v2/api-docs',
+      // schemaPath: join(__dirname, 'oneapi.json'),
+      projectName: 'hatch4tech-user',
+      mock: false,
+    },
     // {
     //   requestLibPath: "import { request } from '@umijs/max'",
     //   // 或者使用在线的版本
@@ -143,14 +143,14 @@ export default defineConfig({
     //   projectName: 'hatch4tech-team',
     //   mock: false,
     // },
-    // {
-    //   requestLibPath: "import { request } from '@umijs/max'",
-    //   // 或者使用在线的版本
-    //   schemaPath: 'http://localhost:88/hatch4tech-auth/v2/api-docs',
-    //   // schemaPath: join(__dirname, 'oneapi.json'),
-    //   projectName: 'hatch4tech-auth',
-    //   mock: false,
-    // },
+    {
+      requestLibPath: "import { request } from '@umijs/max'",
+      // 或者使用在线的版本
+      schemaPath: 'http://localhost:88/hatch4tech-auth/v2/api-docs',
+      // schemaPath: join(__dirname, 'oneapi.json'),
+      projectName: 'hatch4tech-auth',
+      mock: false,
+    },
     // {
     //   requestLibPath: "import { request } from '@umijs/max'",
     //   // 或者使用在线的版本
@@ -165,13 +165,13 @@ export default defineConfig({
     //   projectName: 'hatch4tech-competition',
     //   mock: false,
     // },
-    // {
-    //   requestLibPath: "import { request } from '@umijs/max'",
-    //   // 或者使用在线的版本
-    //   schemaPath: 'http://localhost:88/hatch4tech-biz/v2/api-docs',
-    //   projectName: 'hatch4tech-biz',
-    //   mock: false,
-    // },
+    {
+      requestLibPath: "import { request } from '@umijs/max'",
+      // 或者使用在线的版本
+      schemaPath: 'http://localhost:88/hatch4tech-biz/v2/api-docs',
+      projectName: 'hatch4tech-biz',
+      mock: false,
+    },
   ],
   mfsu: {
     strategy: 'normal',

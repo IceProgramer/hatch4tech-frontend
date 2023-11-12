@@ -12,8 +12,8 @@ import {
 } from '@ant-design/pro-components';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
 import { history, useModel } from '@umijs/max';
-import { Alert, Col, Divider, message, Row, Space, Tabs } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { Alert, Col, Divider, message, Modal, Row, Space, Tabs } from 'antd';
+import React, { useState } from 'react';
 import { flushSync } from 'react-dom';
 import Settings from '../../../../config/defaultSettings';
 // import { history } from "@umijs/max";
@@ -37,6 +37,7 @@ const Login: React.FC = () => {
   const [type, setType] = useState<string>('account');
   const [isModalOpen, setIsModalOpen] = useState(true);
   const { setInitialState } = useModel('@@initialState');
+
   const containerClassName = useEmotionCss(() => {
     return {
       display: 'flex',
@@ -92,6 +93,7 @@ const Login: React.FC = () => {
     }
   };
   const { status, type: loginType } = userLoginState;
+
   return (
     <div className={containerClassName}>
       <Helmet>
@@ -261,6 +263,20 @@ const Login: React.FC = () => {
         </LoginForm>
       </div>
       <Footer />
+      <Modal
+        title="网站通知"
+        open={isModalOpen}
+        onCancel={() => {
+          setIsModalOpen(false);
+        }}
+        footer={null}
+      >
+        <p>我们非常感谢您的参与和支持，感谢您一直以来对我们的网站的支持和信任。我们非常高兴有机会与您分享我们网站的最新动态</p>
+        <p>为了给大家带来更好的体验，需用户重新注册个人学生信息，以便进行必要的维护和升级。我们深知这可能会给您带来不便，但请您理解。</p>
+        <p>第一次活动报名数据并没有消失，所有已上传的数据都将保持完整和安全，将会在期末进行公示</p>
+        <p>同时，挑战杯结果已在竞赛模块中公示，所有同学均可查看</p>
+        <p>感谢您对我们网站的支持</p>
+      </Modal>
     </div>
   );
 };

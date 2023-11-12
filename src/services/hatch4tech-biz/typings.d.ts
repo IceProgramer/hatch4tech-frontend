@@ -1,9 +1,55 @@
 declare namespace API {
+  type BaseResponseBoolean_ = {
+    code?: number;
+    data?: boolean;
+    message?: string;
+    success?: boolean;
+  };
+
+  type BaseResponseLong_ = {
+    code?: number;
+    data?: number;
+    message?: string;
+    success?: boolean;
+  };
+
+  type BaseResponsePagePointRuleVO_ = {
+    code?: number;
+    data?: PagePointRuleVO_;
+    message?: string;
+    success?: boolean;
+  };
+
+  type BaseResponsePageProductVO_ = {
+    code?: number;
+    data?: PageProductVO_;
+    message?: string;
+    success?: boolean;
+  };
+
+  type BaseResponsePointRuleVO_ = {
+    code?: number;
+    data?: PointRuleVO;
+    message?: string;
+    success?: boolean;
+  };
+
+  type BaseResponseProductVO_ = {
+    code?: number;
+    data?: ProductVO;
+    message?: string;
+    success?: boolean;
+  };
+
   type BaseResponseString_ = {
     code?: number;
     data?: string;
     message?: string;
     success?: boolean;
+  };
+
+  type DeleteRequest = {
+    id?: number;
   };
 
   type File = {
@@ -28,7 +74,119 @@ declare namespace API {
     writable?: boolean;
   };
 
+  type getPointRuleByIdUsingGETParams = {
+    /** id */
+    id?: number;
+  };
+
+  type getProductByIdUsingGETParams = {
+    /** id */
+    id?: number;
+  };
+
   type InputStream = true;
+
+  type OrderItem = {
+    asc?: boolean;
+    column?: string;
+  };
+
+  type PagePointRuleVO_ = {
+    current?: number;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: PointRuleVO[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
+  };
+
+  type PageProductVO_ = {
+    current?: number;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: ProductVO[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
+  };
+
+  type PointExchangeApplyRequest = {
+    fileUrl?: string[];
+    memberPlace?: number;
+    pointRule?: number[];
+    pointType?: number;
+    pointWeight?: number;
+    projectName?: string;
+  };
+
+  type PointRuleQueryRequest = {
+    current?: number;
+    id?: number;
+    ids?: number[];
+    pageSize?: number;
+    pointType?: number;
+    searchText?: string;
+    sortField?: string;
+    sortOrder?: string;
+  };
+
+  type PointRuleUpdateRequest = {
+    id?: number;
+    pointName?: string;
+    pointValue?: number;
+    pointWeight?: number;
+  };
+
+  type PointRuleVO = {
+    id?: number;
+    pointName?: string;
+    pointRuleList?: string[];
+    pointType?: number;
+    pointValue?: number;
+    pointWeight?: number;
+  };
+
+  type ProductAddRequest = {
+    productImg?: string;
+    productName?: string;
+    productNum?: number;
+    productPoints?: number;
+    productTypeList?: string[];
+  };
+
+  type ProductQueryRequest = {
+    current?: number;
+    id?: number;
+    ids?: number[];
+    maxPoints?: number;
+    minPoints?: number;
+    pageSize?: number;
+    productTypeList?: string[];
+    searchText?: string;
+    sortField?: string;
+    sortOrder?: string;
+  };
+
+  type ProductUpdateRequest = {
+    exchangeNum?: number;
+    id?: number;
+    productImg?: string;
+    productName?: string;
+    productNum?: number;
+    productPoints?: number;
+    productTypeList?: string[];
+  };
+
+  type ProductVO = {
+    exchangeNum?: number;
+    id?: number;
+    productImg?: string;
+    productName?: string;
+    productNum?: number;
+    productPoints?: number;
+    productTypeList?: string[];
+  };
 
   type Resource = {
     description?: string;

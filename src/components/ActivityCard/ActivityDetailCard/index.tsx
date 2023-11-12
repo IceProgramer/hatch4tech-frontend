@@ -53,7 +53,7 @@ const ActivityDetailCard: React.FC<Props> = (props) => {
                     disabled={hasFavour}
                     onClick={signActivity}
                   >
-                    {!activity?.hasFavour ? '报名活动' : '活动已报名'}
+                    {!hasFavour ? '报名活动' : '活动已报名'}
                   </Button>
                 ) : (
                   <Button type="primary" disabled>

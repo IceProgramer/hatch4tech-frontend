@@ -8,6 +8,7 @@ const FILE_STATUS = {
   MEDAL_IMG: 'medal_image',
   ACTIVITY_IMG: 'activity_image',
   COMPETITION_IMG: 'competition_image',
+  POINT_FILE: 'point_file'
 };
 
 export default FILE_STATUS;
